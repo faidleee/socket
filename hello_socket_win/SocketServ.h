@@ -5,7 +5,7 @@ using namespace std;
 
 #include <winsock2.h>
 #include <WS2tcpip.h>
-#pragma comment (lib, "ws2_32.lib")  //¼ÓÔØ ws2_32.dll
+#pragma comment (lib, "ws2_32.lib")  //åŠ è½½ ws2_32.dll
 
 
 void ThrowError(char* message);
@@ -13,7 +13,7 @@ void Done(char* message);
 int main_socket_serv_win(char* ip, int port);
 
 /*
-* ºê·­Òë
+* å®ç¿»è¯‘
 * WORD				unsigned short
 *
 *
@@ -24,19 +24,19 @@ int main_socket_serv_win(char* ip, int port)
 
 
 
-	//Winsock¿â³õÊ¼»¯
-		//½øĞĞWinsock±à³ÌÊ±£¬
-		//Ê×ÏÈ±ØĞëµ÷ÓÃWSAStartupº¯Êı,
-		//ÉèÖÃ³ÌĞòÖĞÓÃµ½µÄWinsock°æ±¾,²¢³õ
-		//Ê¼»¯ÏàÓ¦°æ±¾µÄ¿â¡£
+	//Winsockåº“åˆå§‹åŒ–
+		//è¿›è¡ŒWinsockç¼–ç¨‹æ—¶ï¼Œ
+		//é¦–å…ˆå¿…é¡»è°ƒç”¨WSAStartupå‡½æ•°,
+		//è®¾ç½®ç¨‹åºä¸­ç”¨åˆ°çš„Winsockç‰ˆæœ¬,å¹¶åˆ
+		//å§‹åŒ–ç›¸åº”ç‰ˆæœ¬çš„åº“ã€‚
 		/*
 		int WSAStartup(WORD wVersionRequested, LPWSADATA lpWSAData);
-		³É¹¦Ê±·µ»Ø0,Ê§°ÜÊ±·µ»Ø·ÇÁãµÄ´íÎó´úÂëÖµ¡£
-		wVersionRequested		³ÌĞòÔ±ÒªÓÃµÄWinsock°æ±¾ĞÅÏ¢¡£
-		lpWSAData				WSADATA½á¹¹Ìå±äÁ¿µÄµØÖ·Öµ¡£
+		æˆåŠŸæ—¶è¿”å›0,å¤±è´¥æ—¶è¿”å›éé›¶çš„é”™è¯¯ä»£ç å€¼ã€‚
+		wVersionRequested		ç¨‹åºå‘˜è¦ç”¨çš„Winsockç‰ˆæœ¬ä¿¡æ¯ã€‚
+		lpWSAData				WSADATAç»“æ„ä½“å˜é‡çš„åœ°å€å€¼ã€‚
 		*/
 	int wsaStartup;
-	WORD wVersionRequest = MAKEWORD(2, 2);//°æ±¾ºÅ
+	WORD wVersionRequest = MAKEWORD(2, 2);//ç‰ˆæœ¬å·
 	WSADATA wsaData;//
 	wsaStartup = WSAStartup(wVersionRequest, &wsaData);
 	if (wsaStartup == 0)
@@ -49,15 +49,15 @@ int main_socket_serv_win(char* ip, int port)
 
 	//Socket
 		/*
-		PF_ INET	IPv4»¥ÁªÍøĞ­Òé×å
-		PF_ INET6	IPv6»¥ÁªÍøĞ­Òé×å
-		PF LOCAL	±¾µØÍ¨ĞÅµÄUNIXĞ­Òé×å
-		PF PACKET	µ×²ãÌ×½Ó×ÖµÄĞ­Òé×å
-		PF_ IPX		IPX NovellĞ­Òé×å
+		PF_ INET	IPv4äº’è”ç½‘åè®®æ—
+		PF_ INET6	IPv6äº’è”ç½‘åè®®æ—
+		PF LOCAL	æœ¬åœ°é€šä¿¡çš„UNIXåè®®æ—
+		PF PACKET	åº•å±‚å¥—æ¥å­—çš„åè®®æ—
+		PF_ IPX		IPX Novellåè®®æ—
 		*/
 		/*
-		SOCK_STREAM	ÃæÏòÁ¬½ÓµÄÌ×½Ó×Ö
-		SOCK_DGRAM	ÃæÏòÏûÏ¢µÄÌ×½Ó×Ö
+		SOCK_STREAM	é¢å‘è¿æ¥çš„å¥—æ¥å­—
+		SOCK_DGRAM	é¢å‘æ¶ˆæ¯çš„å¥—æ¥å­—
 		*/
 	int domin;
 	int type;
@@ -82,25 +82,25 @@ int main_socket_serv_win(char* ip, int port)
 	/*
 	struct sockaddr_in
 	{
-		sa_family_t sin_family;		//µØÖ·×å( Address Family )
-		uint16_t	sin_port;		//16Î»TCP/UDP¶Ë¿ÚºÅ
-		struct	in_addr	sin_addr;	//32Î»IPµØÖ·
-		char	sin_zero[8];		//²»Ê¹ÓÃ.
+		sa_family_t sin_family;		//åœ°å€æ—( Address Family )
+		uint16_t	sin_port;		//16ä½TCP/UDPç«¯å£å·
+		struct	in_addr	sin_addr;	//32ä½IPåœ°å€
+		char	sin_zero[8];		//ä¸ä½¿ç”¨.
 	};
 	struct in_addr{
 
-	In_addr_t s_addr; //32 Î»IPv4 µØÖ·
+	In_addr_t s_addr; //32 ä½IPv4 åœ°å€
 
 	}
 	*/
 
 	/*
-	µØÖ·×å(Address Family)		º¬Òå
-	AF_INET						IPv4ÍøÂçĞ­Òé½íÊ¹ÓÃµÄµØÖ·×å
-	AF_INET6					IPv6ÍøÂçĞ­ÒéÖĞÊ¹ÓÃµÄµØÖ·×å
-	AF LOCAL					±¾µØÍ¨ĞÅÖĞ²ÉÓÃµÄUNIXĞ­ÒéµÄµØÖ·×å
+	åœ°å€æ—(Address Family)		å«ä¹‰
+	AF_INET						IPv4ç½‘ç»œåè®®å·¾ä½¿ç”¨çš„åœ°å€æ—
+	AF_INET6					IPv6ç½‘ç»œåè®®ä¸­ä½¿ç”¨çš„åœ°å€æ—
+	AF LOCAL					æœ¬åœ°é€šä¿¡ä¸­é‡‡ç”¨çš„UNIXåè®®çš„åœ°å€æ—
 	*/
-	//char* ip = "124.221.137.37";//INADDR_ANY ±¾»úip
+	//char* ip = "";//INADDR_ANY æœ¬æœºip
 	//int port = 5050;
 
 	sockaddr_in socaddr;
@@ -128,12 +128,12 @@ int main_socket_serv_win(char* ip, int port)
 	//listen
 			/*
 						int listen(int sock, int backlog);
-						³É¹¦Ê±·µ»Ø0 £¬Ê§°ÜÊ±·µ»Ø-1
+						æˆåŠŸæ—¶è¿”å›0 ï¼Œå¤±è´¥æ—¶è¿”å›-1
 						sock
-						´«µİÃèÊö·ûÌ×½Ó×Ö²ÎÊı³ÉÎª·şÎñÆ÷¶Ë
-						Ì×½Ó×Ö(¼àÌıÌ×½Ó×Ö)
+						ä¼ é€’æè¿°ç¬¦å¥—æ¥å­—å‚æ•°æˆä¸ºæœåŠ¡å™¨ç«¯
+						å¥—æ¥å­—(ç›‘å¬å¥—æ¥å­—)
 						backlog
-						Á¬½ÓÇëÇóµÈ´ı¶ÓÁĞ( Queue )µÄ³¤¶È,±íÊ¾×î¶àÁ¬½ÓÇëÇó½øÈë¶ÓÁĞ
+						è¿æ¥è¯·æ±‚ç­‰å¾…é˜Ÿåˆ—( Queue )çš„é•¿åº¦,è¡¨ç¤ºæœ€å¤šè¿æ¥è¯·æ±‚è¿›å…¥é˜Ÿåˆ—
 			*/
 
 	int flag_listen = listen(hs, 5);
@@ -148,16 +148,16 @@ int main_socket_serv_win(char* ip, int port)
 		//accept
 			/*
 			int accept(int sock, struct sockaddr * addr, socklen_t * addrlen);
-			³É¹¦Ê±·µ»Ø´´½¨µÄÌ×½Ó×ÖÎÄ¼şÃèÊö·û£¬Ê§°ÜÊ±·µ»Ø-1
+			æˆåŠŸæ—¶è¿”å›åˆ›å»ºçš„å¥—æ¥å­—æ–‡ä»¶æè¿°ç¬¦ï¼Œå¤±è´¥æ—¶è¿”å›-1
 
 			sock
-			·şÎñÆ÷Ì×½Ó×ÖµÄÎÄ¼şÃèÊö·û
+			æœåŠ¡å™¨å¥—æ¥å­—çš„æ–‡ä»¶æè¿°ç¬¦
 			addr
-			±£´æ·¢ÆğÁ¬½ÓÇëÇóµÄ¿Í»§¶ËµØÖ·ĞÅÏ¢µÄ±äÁ¿µØÖ·Öµ£¬µ÷ÓÃº¯ÊıºóÏò´«µİÀ´µÄµØÖ·
-			³ä¿Í»§¶ËµØÖ·ĞÅÏ¢
+			ä¿å­˜å‘èµ·è¿æ¥è¯·æ±‚çš„å®¢æˆ·ç«¯åœ°å€ä¿¡æ¯çš„å˜é‡åœ°å€å€¼ï¼Œè°ƒç”¨å‡½æ•°åå‘ä¼ é€’æ¥çš„åœ°å€
+			å……å®¢æˆ·ç«¯åœ°å€ä¿¡æ¯
 			addrlen
-			µÚ¶ş¸ö²ÎÊıaddr½á¹¹ÌåµÄ³¤¶È,µ«ÊÇ´æÓĞ³¤¶ÈµÄ±äÁ¿µØÖ·¡£
-			º¯Êıµ÷ÓÃÍê³Éºó£¬¸Ã±äÁ¿¼´±»ÌîÈë¿Í»§¶ËµØÖ·³¤¶È¡£
+			ç¬¬äºŒä¸ªå‚æ•°addrç»“æ„ä½“çš„é•¿åº¦,ä½†æ˜¯å­˜æœ‰é•¿åº¦çš„å˜é‡åœ°å€ã€‚
+			å‡½æ•°è°ƒç”¨å®Œæˆåï¼Œè¯¥å˜é‡å³è¢«å¡«å…¥å®¢æˆ·ç«¯åœ°å€é•¿åº¦ã€‚
 			*/
 		int clntserv;
 		struct sockaddr_in clnt_addr;
@@ -186,9 +186,9 @@ int main_socket_serv_win(char* ip, int port)
 
 
 
-	//Winsock¿â×¢Ïú
+	//Winsockåº“æ³¨é”€
 	WSACleanup();
-	//³É¹¦Ê±·µ»Ø0£¬Ê§°ÜÊ±·µ»ØSOCKET_ ERROR¡£
+	//æˆåŠŸæ—¶è¿”å›0ï¼Œå¤±è´¥æ—¶è¿”å›SOCKET_ ERRORã€‚
 	return 0;
 }
 
