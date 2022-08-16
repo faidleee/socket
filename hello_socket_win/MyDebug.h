@@ -12,10 +12,10 @@ void ThrowError(char* message)
 }
 void HsGuide()
 {
-	cout << "ÊäÈë¸ñÊ½£º" << "ÎÄ¼þ" << '\t' << "ip" << '\t' 
+	cout << "ÃŠÃ¤ÃˆÃ«Â¸Ã±ÃŠÂ½Â£Âº" << "ÃŽÃ„Â¼Ã¾" << '\t' << "ip" << '\t' 
 	<< "port" << '\t' << "mode" << endl;
 	cout << "mode:"<<endl<<"1:server"<<endl<<"2:client" << endl;
-	cout << "example:" << "./Winsock 0.0.0.0 2000 server" << endl;
+	cout << "example:" << "./Winsock 0.0.0.0 2000 1" << endl;
 
 }
 
